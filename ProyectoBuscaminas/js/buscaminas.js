@@ -1,14 +1,27 @@
+let maxFilas = prompt('Cuantas filas quieres?');
+let maxColumnas = prompt('Cuantas columnas quieres?');
+let numMinas = prompt('Cuantas minas quieres introducir?')
 document.write('<table>');
-for (let i = 0; i < 5; i++){
+
+for (let i = 0; i < maxFilas; i++){
 document.write('<tr>');
 
-for (let i = 0; i < 5; i++){
+for (let j = 0; j < maxColumnas; j++){
 document.write('<td></td>');
 }
 
 document.write('</tr>');
 }
 document.write('</table>');
+
+let arrayTablero = [];
+
+for (let mina = 0; mina < numMimas; mina++){
+    posFila = Math.floor(Math.random()*maxFilas)
+    arrayTablero[posFila][posColumna] = "MINA";
+    console.log(arrayTablero);
+}
+
 
 /* 
     <table>
