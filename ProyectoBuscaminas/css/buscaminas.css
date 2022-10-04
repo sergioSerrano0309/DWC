@@ -9,3 +9,9 @@ table{
     margin-top: 5%;
     text-align: center;
 }
+td{
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+}
