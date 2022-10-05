@@ -51,7 +51,7 @@ for (let cfila = fila - 1; cfila <= fila + 1; cfila++) {
             }
     }
 }
-
+}
 arrayTabler[fila][columna] = numMinasAlrededor;
 
 /* 
