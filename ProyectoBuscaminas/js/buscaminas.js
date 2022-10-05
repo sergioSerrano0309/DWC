@@ -39,13 +39,23 @@ while (contadorMinas< numMinas) {
 };
 
 console.log(arrayTablero);
-console.log(contadorMinas);
 
+let fila = 2;
+let columna = 1;
 
+for (let cfila = fila - 1; cfila <= fila + 1; cfila++) {
+    for (let cColumna = columna - 1; cColumna <= columna + 1; cColumna++ ){
+        if(cfila < 0 || cfila > maxFilas || cColumna < 0 || cColumna > maxColumnas){
+            if(arrayTablero[cfila][cColumna] == 'MINA'){
+                numMinasAlrededor++;
+            }
+    }
+}
+
+arrayTabler[fila][columna] = numMinasAlrededor;
 
 /* 
-    <table>
-        <colgroup span="5">
+     <colgroup span="5">
         <tr>
             <td>mina</td>
             <td>2</td>
