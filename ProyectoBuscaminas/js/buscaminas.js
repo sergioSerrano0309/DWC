@@ -35,7 +35,7 @@ function ponerMinas(posFila, posColumna, numMinas){
 
 let numMinasAlrededor;
 
-function numerosDeLasMinas(numMinasAlrededor){
+function numerosAlrededor(numMinasAlrededor){
     
     for (let fila = 0; fila < maxFilas; fila++) {
         for(let columna = 0; columna < maxColumnas; columna++){      
