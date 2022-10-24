@@ -1,0 +1,19 @@
+td{
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    width: 50px; 
+}
+table{
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+}
+h1{
+    color: brown;
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+}
