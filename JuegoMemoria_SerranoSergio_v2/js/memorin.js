@@ -4,6 +4,7 @@ class Tablero{
     this.filas = filas;
     this.columnas = columnas;
     this.casillas = filas*columnas;
+
     this.crearTablero();
     }
 
@@ -57,27 +58,53 @@ class Tablero{
     }
     
 }
-/*
+
 //clase referente al juego
-class Memorin{
+class Memorin extends Tablero{
     constructor(filas, columnas, parejas) 
     {
         super(filas, columnas);
         this.parejas = parejas;
+
+        this.ponerParejas();
     }
+    /*
 //funcion que creará las parejas
     HacerParejas()
     {
         
-
     }
-
+    */
 //funcion que colocará las parejas en el tablero
     ponerParejas()
     {
+        let contador = (this.casillas)/2;
+        while (contador > 0) 
+        {
+            let posFila = Math.floor(Math.random() * this.filas);
+            let posColumna = Math.floor(Math.random() * this.columnas); 
+            
+            if (this.tablero[posFila][posColumna] == '')
+            {
+                this.talero[posFila][posColumna] = "hola";
+                contador--;
+            }
+        }
 
+        while (contador > 0) 
+        {
+            posFila = Math.floor(Math.random() * this.filas);
+            posColumna = Math.floor(Math.random() * this.columnas); 
+            
+            if (this.tablero[posFila][posColumna] == '')
+            {
+                this.talero[posFila][posColumna] = "adios";
+                contador--;
+            }
+        }
     }
 }
-*/
-let tablero1 = new Tablero(prompt("¿Cuantas filas quieres tener en tu tablero"),prompt("¿Cuantas columnas quieres tener en tu tablero"));
+
+let tablero1 = new Memorin(prompt("¿Cuantas filas quieres tener en tu tablero"),prompt("¿Cuantas columnas quieres tener en tu tablero"));
+console.log(tablero1.tablero);
 tablero1.pintarTablero();
