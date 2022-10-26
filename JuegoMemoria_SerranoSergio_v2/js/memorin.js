@@ -13,29 +13,48 @@ class Tablero{
     {
         this.tablero = [];
     //si el numero de casillas es un numero par y no es igual a dos se creará la tabla   
-        if((this.casillas%2) == 0 && this.casillas != 2 && this.casillas > 0){
-            
-            for (let fila = 0; fila < this.filas; fila++) {
-                this.tablero[fila] = [];
+        
+        let sigue = true;
 
-                for (let columna = 0; columna < this.columnas; columna++) {
-                    this.tablero[fila][columna] = '';
+        //while(sigue)
+        //{
+            if((this.casillas%2) == 0 && this.casillas != 2 && this.casillas > 0){
+                
+
+                for (let fila = 0; fila < this.filas; fila++) {
+                    this.tablero[fila] = [];
+
+                    for (let columna = 0; columna < this.columnas; columna++) {
+                        this.tablero[fila][columna] = '';
+                    }
                 }
+
+                sigue = false;
+
+            }
+        //si el número de casillas es 2 no se creará la tabla porque no tendría sentido iniciar el juego por tener una dificultad demasiado sencilla 
+            else if(this.casillas == 2)
+            {
+                alert('pon otro número que así sería demasiado fácil');
+               // filas = (prompt("¿Cuantas filas quieres tener en tu tablero"));
+               // columnas = (prompt("¿Cuantas columnas quieres tener en tu tablero"));
+            }
+        //  si el numero de casillas es negativo lanzará el siguiente error
+            else if(this.casillas <= 0)
+            {
+                alert('El numero de casillas ha de ser mayor que 0');
+               // filas = (prompt("¿Cuantas filas quieres tener en tu tablero"));
+               // columnas = (prompt("¿Cuantas columnas quieres tener en tu tablero"));
+            } 
+        // si el número de casillas es impar lanzará el siguiente error
+            else if((this.casillas%2) != 0)
+            {
+                alert('El número de casillas ha de ser un número par');
+                // filas = (prompt("¿Cuantas filas quieres tener en tu tablero"));
+               // columnas = (prompt("¿Cuantas columnas quieres tener en tu tablero"));
             }
 
-        }
-    //si el número de casillas es 2 no se creará la tabla porque no tendría sentido iniciar el juego por tener una dificultad demasiado sencilla 
-        else if(this.casillas == 2){
-            alert('pon otro número que así sería demasiado fácil')
-        }
-    //  si el numero de casillas es negativo lanzará el siguiente error
-    else if(this.casillas < 0){
-        alert('El numero de casillas ha de ser mayor que dos (como mínimo)')
-    } 
-    // si el número de casillas es impar lanzará el siguiente error
-        else {
-            alert('El número de casillas ha de ser un número par')
-        }
+        //}
 
     }
 
@@ -60,6 +79,7 @@ class Tablero{
 }
 
 //clase referente al juego
+
 class Memorin extends Tablero{
     constructor(filas, columnas, parejas) 
     {
@@ -68,42 +88,29 @@ class Memorin extends Tablero{
 
         this.ponerParejas();
     }
-    /*
-//funcion que creará las parejas
-    HacerParejas()
-    {
-        
-    }
-    */
+      
 //funcion que colocará las parejas en el tablero
+
     ponerParejas()
     {
-        let contador = (this.casillas)/2;
-        while (contador > 0) 
+
+        for (let i = 1; i <= (this.filas*this.columnas)/2; i++)
         {
             let posFila = Math.floor(Math.random() * this.filas);
             let posColumna = Math.floor(Math.random() * this.columnas); 
-            
-            if (this.tablero[posFila][posColumna] == '')
-            {
-                this.talero[posFila][posColumna] = "hola";
-                contador--;
-            }
-        }
 
-        while (contador > 0) 
-        {
-            posFila = Math.floor(Math.random() * this.filas);
-            posColumna = Math.floor(Math.random() * this.columnas); 
+            let posFila2 = Math.floor(Math.random() * this.filas);
+            let posColumna2 = Math.floor(Math.random() * this.columnas); 
             
             if (this.tablero[posFila][posColumna] == '')
             {
-                this.talero[posFila][posColumna] = "adios";
-                contador--;
+                this.tablero[posFila][posColumna] = i;
+                this.tablero[posFila2][posColumna2] = i;               
             }
         }
     }
 }
+
 
 let tablero1 = new Memorin(prompt("¿Cuantas filas quieres tener en tu tablero"),prompt("¿Cuantas columnas quieres tener en tu tablero"));
 console.log(tablero1.tablero);
