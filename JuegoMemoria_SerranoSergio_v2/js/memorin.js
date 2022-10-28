@@ -81,10 +81,9 @@ class Tablero{
 //clase referente al juego
 
 class Memorin extends Tablero{
-    constructor(filas, columnas, parejas) 
+    constructor(filas, columnas, casillas) 
     {
-        super(filas, columnas);
-        this.parejas = parejas;
+        super(filas, columnas, casillas);
 
         this.ponerParejas();
     }
@@ -92,24 +91,43 @@ class Memorin extends Tablero{
 //funcion que colocará las parejas en el tablero
 
     ponerParejas()
-    {
-
-        for (let i = 1; i <= (this.filas*this.columnas)/2; i++)
-        {
-            let posFila = Math.floor(Math.random() * this.filas);
-            let posColumna = Math.floor(Math.random() * this.columnas); 
-
-            let posFila2 = Math.floor(Math.random() * this.filas);
-            let posColumna2 = Math.floor(Math.random() * this.columnas); 
-            
-            if (this.tablero[posFila][posColumna] == '')
+    {   
+        let lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let posFila;
+        let posColumna;
+        let posicion = 0; 
+        let contadorParejas = 0;
+        let 
+           
+        while(posicion < this.casillas)
             {
-                this.tablero[posFila][posColumna] = i;
-                this.tablero[posFila2][posColumna2] = i;               
-            }
-        }
-    }
+                posFila = Math.floor(Math.random() * this.filas);
+                posColumna = Math.floor(Math.random() * this.columnas);
+
+                if (this.tablero[posFila][posColumna] == '') 
+                    {
+                        this.tablero[posFila][posColumna] = lista[posicion];     
+
+
+                        while(posicion < this.casillas)
+                        {
+                            posFila = Math.floor(Math.random() * this.filas);
+                            posColumna = Math.floor(Math.random() * this.columnas);
+
+                             if (this.tablero[posFila][posColumna] == '') 
+                                {
+                                    this.tablero[posFila][posColumna] = lista[posicion];     
+                                    posicion++;
+                       
+                                }             
+                            }
+                    }             
+                }
+           
+        posicion++; 
+    };
 }
+
 
 
 let tablero1 = new Memorin(prompt("¿Cuantas filas quieres tener en tu tablero"),prompt("¿Cuantas columnas quieres tener en tu tablero"));
