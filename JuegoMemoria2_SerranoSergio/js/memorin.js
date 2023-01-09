@@ -49,19 +49,23 @@ class Tablero{
         //funcion que dibuja el tablero por pantalla
     pintarTablero()
     {
-            
-            document.write('<table>');
+            let tabla = document.createElement('table');
+            let fila;
+            let columna;
 
             for (let i = 0; i < this.filas; i++) {
-                document.write('<tr>');
-
+                fila = document.createElement('tr');
+                tabla.appendChild(fila);
                 for (let j = 0; j < this.columnas; j++) {
-                    document.write(`<td>${this.tablero[i][j]}</td>`);
+                    columna = document.createElement('td');
+                    fila.appendChild(columna);
+                    columna.innerHTML = this.tablero[i][j];
                 }
 
-                document.write('</tr>');
+                
             }
-            document.write('</table>');
+            
+            document.body.appendChild(tabla)
     }
 
 }
@@ -109,6 +113,8 @@ class Memorin extends Tablero{
             }
                 
         }
+        
+        
     }
     
 }
