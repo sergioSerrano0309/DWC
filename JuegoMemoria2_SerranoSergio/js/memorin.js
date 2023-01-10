@@ -59,13 +59,14 @@ class Tablero{
                 for (let j = 0; j < this.columnas; j++) {
                     columna = document.createElement('td');
                     fila.appendChild(columna);
-                    columna.innerHTML = this.tablero[i][j];
+                    //columna.innerHTML = this.tablero[i][j];
                 }
 
                 
             }
             
             document.body.appendChild(tabla)
+            console.log(this.tablero)
     }
 
 }
@@ -113,8 +114,7 @@ class Memorin extends Tablero{
             }
                 
         }
-        
-        
+               
     }
     
 }
