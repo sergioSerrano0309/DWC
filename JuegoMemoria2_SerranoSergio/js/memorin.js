@@ -45,30 +45,30 @@ class Tablero{
             }
             
     }
-    
-        //funcion que dibuja el tablero por pantalla
+
     pintarTablero()
     {
-            let tabla = document.createElement('table');
-            let fila;
-            let columna;
+        let tabla = document.createElement('table');
+        let fila;
+        let columna;
+        
+        for (let i = 0; i < this.filas; i++) {
+        fila = document.createElement('tr');
+        tabla.appendChild(fila);
 
-            for (let i = 0; i < this.filas; i++) {
-                fila = document.createElement('tr');
-                tabla.appendChild(fila);
-                for (let j = 0; j < this.columnas; j++) {
-                    columna = document.createElement('td');
-                    fila.appendChild(columna);
-                    //columna.innerHTML = this.tablero[i][j];
-                }
-
-                
-            }
+        for (let j = 0; j < this.columnas; j++) {
+            columna = document.createElement('td');
+            columna.id = `f${i}_c${j}`;
+            fila.appendChild(columna);
+            columna.dataset.fila = i;
+            columna.dataset.columna = j;
             
-            document.body.appendChild(tabla)
-            console.log(this.tablero)
-    }
+            }            
+        }
 
+        document.body.appendChild(tabla)
+    }
+    
 }
 
 
@@ -117,9 +117,55 @@ class Memorin extends Tablero{
                
     }
     
+    //funcion que dibuja el tablero por pantalla
+    pintarTablero()
+    {
+        super.pintarTablero();
+
+        let celda;
+        this.despejar = this.despejar.bind(this);
+        
+        for (let i = 0; i < this.filas; i++) {
+
+            for (let j = 0; j < this.columnas; j++) 
+            {
+                celda = document.getElementById(`f${i}_c${j}`);
+                celda.addEventListener('contextmenu', this.despejar);
+            }            
+        }
+
+        console.log(this.tablero)
+    }
+
+    despejar(elEvento) {
+        let evento = elEvento || window.event;
+        let celda = evento.currentTarget;
+        
+        this.despejarCelda(celda);
+    }
+
+    despejarCelda(celda) {
+        document.oncontextmenu = function(){return false}
+        let fila = parseInt(celda.dataset.fila);
+        let columna = parseInt(celda.dataset.columna);
+
+        // Marcar la celda despejada
+        celda.dataset.despejado = true;
+        celda.style.backgroundColor = "blue";
+        celda.removeEventListener('contextmenu', this.despejar);
+
+        let valorCelda = this.tablero[fila][columna];
+
+        
+        let arrayFilas;
+        let arrayColumnas; 
+ 
+        celda.innerHTML = valorCelda
+
+    }
 }
 
-let filas = prompt("¿Cuantas filas quieres tener en tu tablero");
-let columnas = prompt("¿Cuantas columnas quieres tener en tu tablero");
+let filas = prompt("¿Cuantas filas quieres tener en tu tablero?");
+let columnas = prompt("¿Cuantas columnas quieres tener en tu tablero?");
 let tablero1 = new Memorin(filas, columnas);        
 tablero1.pintarTablero();
