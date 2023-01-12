@@ -145,27 +145,32 @@ class Memorin extends Tablero{
     }
 
     despejarCelda(celda) {
+        
         document.oncontextmenu = function(){return false}
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
+        let contador;
 
         // Marcar la celda despejada
         celda.dataset.despejado = true;
         celda.style.backgroundColor = "blue";
-        celda.removeEventListener('contextmenu', this.despejar);
+        
 
         let valorCelda = this.tablero[fila][columna];
 
-        
-        let arrayFilas;
-        let arrayColumnas; 
- 
         celda.innerHTML = valorCelda
-
+        contador = contador + 1;
+        
+        if (contador == 2)
+        {
+            
+        }
     }
 }
 
+window.onload = function() {
 let filas = prompt("¿Cuantas filas quieres tener en tu tablero?");
 let columnas = prompt("¿Cuantas columnas quieres tener en tu tablero?");
 let tablero1 = new Memorin(filas, columnas);        
 tablero1.pintarTablero();
+}
