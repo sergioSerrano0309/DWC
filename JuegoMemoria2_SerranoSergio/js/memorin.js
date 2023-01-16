@@ -137,6 +137,31 @@ class Memorin extends Tablero{
         console.log(this.tablero)
     }
 
+    ganar()
+    {
+        let contadorDeCasillas = 0;
+        let celda;
+        let despejado;
+
+        for (let i = 0; i < this.filas; i++) {
+            for (let j = 0; j < this.columnas; j++){
+                
+                celda = document.getElementById(`f${i}_c${j}`);
+                despejado = celda.getAttribute("data-despejado");
+                if(despejado == true)
+                {
+                    contadorDeCasillas = contadorDeCasillas + 1;
+                }
+                console.log(contadorDeCasillas)
+            }
+        }
+        
+        if(contadorDeCasillas >= (this.filas * this.columnas))
+        {
+            alert("Has ganado");
+        }
+    }
+
     despejar(elEvento) {
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
@@ -159,18 +184,17 @@ class Memorin extends Tablero{
         let valorCelda = this.tablero[fila][columna];
 
         celda.innerHTML = valorCelda
+        celda.dataset.despejado = true;
         contador = contador + 1;
         
-        if (contador == 2)
-        {
-            
-        }
+        this.ganar();
     }
 }
 
-window.onload = function() {
-let filas = prompt("¿Cuantas filas quieres tener en tu tablero?");
-let columnas = prompt("¿Cuantas columnas quieres tener en tu tablero?");
-let tablero1 = new Memorin(filas, columnas);        
-tablero1.pintarTablero();
+window.onload = function() 
+{
+    let filas = prompt("¿Cuantas filas quieres tener en tu tablero?");
+    let columnas = prompt("¿Cuantas columnas quieres tener en tu tablero?");
+    let tablero1 = new Memorin(filas, columnas);        
+    tablero1.pintarTablero();
 }
