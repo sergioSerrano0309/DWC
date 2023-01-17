@@ -51,6 +51,7 @@ class Tablero{
         let tabla = document.createElement('table');
         let fila;
         let columna;
+
         
         for (let i = 0; i < this.filas; i++) {
         fila = document.createElement('tr');
@@ -67,6 +68,7 @@ class Tablero{
         }
 
         document.body.appendChild(tabla)
+
     }
     
 }
@@ -75,11 +77,20 @@ class Tablero{
 
 //clase referente al juego
 
+const NUM_PAREJA = 2;
+var carta1;
+var carta2;
+var contador = 0;
+var carta1id;
+var carta2id;
 class Memorin extends Tablero{
+
+    
+
     constructor(filas, columnas, casillas) 
     {
         super(filas, columnas, casillas);
-
+        this.cartaElegida = new Array();
         this.ponerParejas();
     }
       
@@ -137,6 +148,11 @@ class Memorin extends Tablero{
         console.log(this.tablero)
     }
 
+    reiniciarJuego()
+    {
+        window.location.reload();
+    }
+
     ganar()
     {
         let contadorDeCasillas = 0;
@@ -152,7 +168,6 @@ class Memorin extends Tablero{
                 {
                     contadorDeCasillas = contadorDeCasillas + 1;
                 }
-                console.log(contadorDeCasillas)
             }
         }
         
@@ -166,29 +181,69 @@ class Memorin extends Tablero{
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
         
-        this.despejarCelda(celda);
+        if(contador == 0)
+        {
+            this.despejarCelda(celda)
+        }
+        else if(contador == 1)
+        {
+            setTimeout(() => this.despejarCelda(celda), 1000);
+        }
+        
     }
+
 
     despejarCelda(celda) {
         
         document.oncontextmenu = function(){return false}
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
-        let contador;
-
+        let celda1;
+        let celda2;
+        
         // Marcar la celda despejada
         celda.dataset.despejado = true;
         celda.style.backgroundColor = "blue";
-        
 
         let valorCelda = this.tablero[fila][columna];
 
         celda.innerHTML = valorCelda
         celda.dataset.despejado = true;
-        contador = contador + 1;
         
+        
+
+        if(contador == 0)
+        {
+            carta1 = celda.textContent;
+            carta1id = celda.getAttribute("id")
+            contador = contador + 1;
+            celda.innerHTML = valorCelda
+        }
+        else if(contador == 1)
+        {
+            carta2 = celda.textContent;
+            carta2id = celda.getAttribute("id")
+           
+            if(carta1 != carta2)
+            {
+                celda1 = document.getElementById(carta1id);
+                celda2 = document.getElementById(carta2id);
+                celda1.style.backgroundColor = "";
+                celda2.style.backgroundColor = "";
+                celda1.innerHTML = "";
+                celda2.innerHTML = "";
+                contador = 0;
+
+            }
+            else if(carta1 == carta2)
+            {
+                contador = 0;
+            }
+        }
+
         this.ganar();
     }
+
 }
 
 window.onload = function() 
