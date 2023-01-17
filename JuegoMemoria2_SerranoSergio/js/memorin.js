@@ -178,17 +178,14 @@ class Memorin extends Tablero{
     }
 
     despejar(elEvento) {
+        document.oncontextmenu = function(){return false}
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
         
-        if(contador == 0)
-        {
-            this.despejarCelda(celda)
-        }
-        else if(contador == 1)
-        {
-            setTimeout(() => this.despejarCelda(celda), 1000);
-        }
+   
+
+        this.despejarCelda(celda);
+
         
     }
 
@@ -200,40 +197,35 @@ class Memorin extends Tablero{
         let columna = parseInt(celda.dataset.columna);
         let celda1;
         let celda2;
-        
-        // Marcar la celda despejada
-        celda.dataset.despejado = true;
-        celda.style.backgroundColor = "blue";
-
         let valorCelda = this.tablero[fila][columna];
 
         celda.innerHTML = valorCelda
+        celda.style.backgroundColor = "blue";
         celda.dataset.despejado = true;
-        
-        
 
         if(contador == 0)
         {
-            carta1 = celda.textContent;
+            carta1 = celda.innerText;
             carta1id = celda.getAttribute("id")
             contador = contador + 1;
-            celda.innerHTML = valorCelda
+            
         }
         else if(contador == 1)
         {
-            carta2 = celda.textContent;
+            carta2 = celda.innerText;
             carta2id = celda.getAttribute("id")
            
             if(carta1 != carta2)
             {
-                celda1 = document.getElementById(carta1id);
-                celda2 = document.getElementById(carta2id);
-                celda1.style.backgroundColor = "";
-                celda2.style.backgroundColor = "";
-                celda1.innerHTML = "";
-                celda2.innerHTML = "";
-                contador = 0;
-
+                setTimeout(function(){
+                    celda1 = document.getElementById(carta1id);
+                    celda2 = document.getElementById(carta2id);
+                    celda1.style.backgroundColor = "";
+                    celda2.style.backgroundColor = "";
+                    celda1.innerHTML = "";
+                    celda2.innerHTML = "";
+                    contador = 0;
+                }, 300);
             }
             else if(carta1 == carta2)
             {
