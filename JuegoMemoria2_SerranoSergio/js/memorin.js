@@ -1,4 +1,12 @@
-document.write('<h1>Juego de Memoria</h1>')
+const NUM_PAREJA = 2;
+var carta1;
+var carta2;
+var contador = 0;
+var carta1id;
+var carta2id;
+var contadorPuntos = 0;
+var puntos = 0;
+var puntosMax = (this.casillas / 2) * 10;
 class Tablero{
     constructor(filas, columnas)
     {
@@ -51,7 +59,10 @@ class Tablero{
         let tabla = document.createElement('table');
         let fila;
         let columna;
-
+        let titulo = document.createElement('h1');
+        let puntuacion = document.createElement('h2');
+        titulo.innerHTML = "Juego de Memoria";
+        puntuacion.id = "puntuacion";
         
         for (let i = 0; i < this.filas; i++) {
         fila = document.createElement('tr');
@@ -67,7 +78,10 @@ class Tablero{
             }            
         }
 
+        document.body.appendChild(titulo)
+        document.body.appendChild(puntuacion)
         document.body.appendChild(tabla)
+        
 
     }
     
@@ -77,12 +91,6 @@ class Tablero{
 
 //clase referente al juego
 
-const NUM_PAREJA = 2;
-var carta1;
-var carta2;
-var contador = 0;
-var carta1id;
-var carta2id;
 class Memorin extends Tablero{
 
     
@@ -103,6 +111,7 @@ class Memorin extends Tablero{
         let contador = 0;
         let posFila;
         let posColumna;
+        
 
         while (contador < this.casillas) {
                 
@@ -177,7 +186,7 @@ class Memorin extends Tablero{
         }
     }
 
-    despejar(elEvento) {
+     despejar(elEvento) {
         document.oncontextmenu = function(){return false}
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
@@ -187,21 +196,26 @@ class Memorin extends Tablero{
         this.despejarCelda(celda);
 
         
-    }
+    } 
 
 
     despejarCelda(celda) {
         
         document.oncontextmenu = function(){return false}
+
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
         let celda1;
         let celda2;
         let valorCelda = this.tablero[fila][columna];
+        let puntuacion;
+
 
         celda.innerHTML = valorCelda
         celda.style.backgroundColor = "blue";
         celda.dataset.despejado = true;
+
+        
 
         if(contador == 0)
         {
@@ -225,12 +239,45 @@ class Memorin extends Tablero{
                     celda1.innerHTML = "";
                     celda2.innerHTML = "";
                     contador = 0;
+                    contadorPuntos++
                 }, 300);
             }
             else if(carta1 == carta2)
             {
-                contador = 0;
+                if(contadorPuntos == 0)
+                {
+                    puntuacion = document.getElementById(puntuacion)
+                    contador = 0;
+                    contadorPuntos = 0;
+                    puntos += 10;
+                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                }
+                else if(contadorPuntos == 1)
+                {
+                    puntuacion = document.getElementById(puntuacion)
+                    contador = 0;
+                    contadorPuntos = 0;
+                    puntos += 5;
+                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                }
+                else if(contadorPuntos == 2)
+                {
+                    puntuacion = document.getElementById(puntuacion)
+                    contador = 0;
+                    contadorPuntos = 0;
+                    puntos += 2.5;
+                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                }
+                else if(contadorPuntos >= 3)
+                {
+                    puntuacion = document.getElementById(puntuacion)
+                    contador = 0;
+                    contadorPuntos = 0;
+                    puntos += 0;
+                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                }
             }
+            console.log(puntos);
         }
 
         this.ganar();
