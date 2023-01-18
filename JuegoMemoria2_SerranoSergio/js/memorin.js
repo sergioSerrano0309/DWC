@@ -63,6 +63,7 @@ class Tablero{
         let puntuacion = document.createElement('h2');
         titulo.innerHTML = "Juego de Memoria";
         puntuacion.id = "puntuacion";
+        puntuacion.innerHTML = puntos+"/"+(this.casillas / 2) * 10
         
         for (let i = 0; i < this.filas; i++) {
         fila = document.createElement('tr');
@@ -208,14 +209,12 @@ class Memorin extends Tablero{
         let celda1;
         let celda2;
         let valorCelda = this.tablero[fila][columna];
-        let puntuacion;
-
+        
+        let puntuacion = document.getElementById(puntuacion)
 
         celda.innerHTML = valorCelda
         celda.style.backgroundColor = "blue";
         celda.dataset.despejado = true;
-
-        
 
         if(contador == 0)
         {
@@ -246,38 +245,43 @@ class Memorin extends Tablero{
             {
                 if(contadorPuntos == 0)
                 {
-                    puntuacion = document.getElementById(puntuacion)
+                    
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 10;
                     puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    
                 }
                 else if(contadorPuntos == 1)
                 {
-                    puntuacion = document.getElementById(puntuacion)
+                    
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 5;
                     puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    
                 }
                 else if(contadorPuntos == 2)
                 {
-                    puntuacion = document.getElementById(puntuacion)
+                    
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 2.5;
                     puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    
                 }
                 else if(contadorPuntos >= 3)
                 {
-                    puntuacion = document.getElementById(puntuacion)
+                    
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 0;
                     puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    
                 }
             }
             console.log(puntos);
+            
         }
 
         this.ganar();
