@@ -67,7 +67,7 @@ class Tablero{
         reiniciar.innerHTML = "REINICIAR"
 
         titulo.innerHTML = "Juego de Memoria";
-        puntuacion.id = "puntuacion";
+        puntuacion.id = 1;
         puntuacion.innerHTML = puntos+"/"+(this.casillas / 2) * 10
         
         for (let i = 0; i < this.filas; i++) {
@@ -253,7 +253,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 10;
-                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
                     
                 }
                 else if(contadorPuntos == 1)
@@ -262,7 +262,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 5;
-                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
                     
                 }
                 else if(contadorPuntos == 2)
@@ -271,7 +271,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 2.5;
-                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
                     
                 }
                 else if(contadorPuntos >= 3)
@@ -280,7 +280,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 0;
-                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
                     
                 }
             }
