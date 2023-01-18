@@ -6,7 +6,7 @@ var carta1id;
 var carta2id;
 var contadorPuntos = 0;
 var puntos = 0;
-var puntosMax = (this.casillas / 2) * 10;
+
 class Tablero{
     constructor(filas, columnas)
     {
@@ -193,7 +193,7 @@ class Memorin extends Tablero{
                 
                 celda = document.getElementById(`f${i}_c${j}`);
                 despejado = celda.getAttribute("data-despejado");
-                if(despejado == true)
+                if(despejado == "true")
                 {
                     contadorDeCasillas = contadorDeCasillas + 1;
                 }
@@ -202,7 +202,9 @@ class Memorin extends Tablero{
         
         if(contadorDeCasillas >= (this.filas * this.columnas))
         {
-            alert("Has ganado");
+            alert("Enhorabuena, Has ganado!"+
+                   "\nTu puntuacion ha sido de "+puntos+"/"+ (this.casillas / 2) * 10
+            );
         }
     }
 
