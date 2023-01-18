@@ -61,6 +61,11 @@ class Tablero{
         let columna;
         let titulo = document.createElement('h1');
         let puntuacion = document.createElement('h2');
+
+        let reiniciar = document.createElement('button')
+        reiniciar.setAttribute("onclick", "reiniciarJuego()")
+        reiniciar.innerHTML = "REINICIAR"
+
         titulo.innerHTML = "Juego de Memoria";
         puntuacion.id = "puntuacion";
         puntuacion.innerHTML = puntos+"/"+(this.casillas / 2) * 10
@@ -82,6 +87,7 @@ class Tablero{
         document.body.appendChild(titulo)
         document.body.appendChild(puntuacion)
         document.body.appendChild(tabla)
+        document.body.appendChild(reiniciar)
         
 
     }
@@ -160,7 +166,7 @@ class Memorin extends Tablero{
 
     reiniciarJuego()
     {
-        window.location.reload();
+        confirm("¿Seguro que quieres reiniciar el juego?")
     }
 
     ganar()
