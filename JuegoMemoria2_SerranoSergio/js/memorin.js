@@ -215,11 +215,9 @@ class Memorin extends Tablero{
         let celda1;
         let celda2;
         let valorCelda = this.tablero[fila][columna];
-        
-        let puntuacion = document.getElementById(puntuacion)
 
         celda.innerHTML = valorCelda
-        celda.style.backgroundColor = "blue";
+        celda.style.background = "linear-gradient(90deg, #0066CC 0%, #28b3d6 100%)";
         celda.dataset.despejado = true;
 
         if(contador == 0)
@@ -239,8 +237,8 @@ class Memorin extends Tablero{
                 setTimeout(function(){
                     celda1 = document.getElementById(carta1id);
                     celda2 = document.getElementById(carta2id);
-                    celda1.style.backgroundColor = "";
-                    celda2.style.backgroundColor = "";
+                    celda1.style.background = "";
+                    celda2.style.background = "";
                     celda1.innerHTML = "";
                     celda2.innerHTML = "";
                     contador = 0;
@@ -255,7 +253,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 10;
-                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
                     
                 }
                 else if(contadorPuntos == 1)
@@ -264,7 +262,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 5;
-                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
                     
                 }
                 else if(contadorPuntos == 2)
@@ -273,7 +271,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 2.5;
-                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
                     
                 }
                 else if(contadorPuntos >= 3)
@@ -282,7 +280,7 @@ class Memorin extends Tablero{
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 0;
-                    puntuacion.innerHTML = puntos+"/"+puntosMax;
+                    document.getElementById(puntuacion).innerHTML = puntos+"/"+puntosMax;
                     
                 }
             }
