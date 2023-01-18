@@ -63,10 +63,11 @@ class Tablero{
         let puntuacion = document.createElement('h2');
 
         let reiniciar = document.createElement('button')
-        reiniciar.setAttribute("onclick", "reiniciarJuego()")
-        reiniciar.innerHTML = "REINICIAR"
+        reiniciar.innerHTML = "REINICIAR";
+        reiniciar.id = 2;
 
         titulo.innerHTML = "Juego de Memoria";
+
         puntuacion.id = 1;
         puntuacion.innerHTML = puntos+"/"+(this.casillas / 2) * 10
         
@@ -150,8 +151,17 @@ class Memorin extends Tablero{
         super.pintarTablero();
 
         let celda;
+        let btnReinicio;
+        
         this.despejar = this.despejar.bind(this);
         
+        this.reiniciarJuego = this.reiniciarJuego.bind(this)      
+        btnReinicio = document.getElementById(2)
+        
+
+        btnReinicio.addEventListener("click", this.reiniciarJuego)
+
+
         for (let i = 0; i < this.filas; i++) {
 
             for (let j = 0; j < this.columnas; j++) 
@@ -166,8 +176,11 @@ class Memorin extends Tablero{
 
     reiniciarJuego()
     {
-        confirm("¿Seguro que quieres reiniciar el juego?")
-    }
+        if(confirm("¿Seguro que quieres reiniciar el juego?")==true)
+        {
+        location.reload();
+        }
+    }  
 
     ganar()
     {
