@@ -6,6 +6,7 @@ var carta1id;
 var carta2id;
 var contadorPuntos = 0;
 var puntos = 0;
+var segundos = 0;
 
 class Tablero{
     constructor(filas, columnas)
@@ -84,7 +85,6 @@ class Tablero{
             
             }            
         }
-        document.body.setAttribute("onload", "carga()")
         document.body.appendChild(titulo)
         document.body.appendChild(puntuacion)
 
@@ -94,17 +94,6 @@ class Tablero{
 
     }
     
-    carga()
-    {
-        
-        
-        setInterval(
-            
-        )
-        
-
-    }
-
 }
 
 
@@ -194,34 +183,7 @@ class Memorin extends Tablero{
         }
     }  
 
-    ganar()
-    {
-        let contadorDeCasillas = 0;
-        let celda;
-        let despejado;
-
-        for (let i = 0; i < this.filas; i++) {
-            for (let j = 0; j < this.columnas; j++){
-                
-                celda = document.getElementById(`f${i}_c${j}`);
-                despejado = celda.getAttribute("data-despejado");
-                if(despejado == "true")
-                {
-                    contadorDeCasillas = contadorDeCasillas + 1;
-                }
-            }
-        }
-        
-        if(contadorDeCasillas >= (this.filas * this.columnas))
-        {
-            alert("Enhorabuena, Has ganado!"+
-                   "\nTu puntuacion ha sido de "+puntos+"/"+ (this.casillas / 2) * 10
-                    +"\nLo has logrado en "+this.tiempo
-            );
-        }
-    }
-
-     despejar(elEvento) {
+    despejar(elEvento) {
         document.oncontextmenu = function(){return false}
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
@@ -237,7 +199,7 @@ class Memorin extends Tablero{
     despejarCelda(celda) {
         
         document.oncontextmenu = function(){return false}
-
+        
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
         let celda1;
@@ -252,9 +214,9 @@ class Memorin extends Tablero{
         {
             carta1 = celda.innerText;
             carta1id = celda.getAttribute("id")
+            celda1 = document.getElementById(carta1id);
             contador = contador + 1;
-            
-            
+            celda1.removeEventListener("contextmenu", this.despejar)
         }
         else if(contador == 1)
         {
@@ -263,15 +225,18 @@ class Memorin extends Tablero{
            
             if(carta1 != carta2)
             {
+                celda1 = document.getElementById(carta1id);
+                celda2 = document.getElementById(carta2id);
+                celda1.addEventListener("contextmenu", this.despejar)
                 setTimeout(function(){
-                    celda1 = document.getElementById(carta1id);
-                    celda2 = document.getElementById(carta2id);
+                    
                     celda1.style.background = "";
                     celda2.style.background = "";
                     celda1.innerHTML = "";
                     celda2.innerHTML = "";
                     contador = 0;
                     contadorPuntos++
+                    
                 }, 300);
             }
             else if(carta1 == carta2)
@@ -334,6 +299,37 @@ class Memorin extends Tablero{
         }
 
         this.ganar();
+    }
+
+    ganar()
+    {
+        let contadorDeCasillas = 0;
+        let celda;
+        let despejado;
+
+        setInterval(function(){
+            segundos++;
+        },1000);
+        for (let i = 0; i < this.filas; i++) {
+            for (let j = 0; j < this.columnas; j++){
+                
+                celda = document.getElementById(`f${i}_c${j}`);
+                despejado = celda.getAttribute("data-despejado");
+                if(despejado == "true")
+                {
+                    contadorDeCasillas = contadorDeCasillas + 1;
+                }
+            }
+        }
+        
+        if(contadorDeCasillas >= (this.filas * this.columnas))
+        {
+            alert("Enhorabuena, Has ganado!"+
+                   "\nTu puntuacion ha sido de "+puntos+"/"+ (this.casillas / 2) * 10
+                    +"\nLo has logrado en "+segundos+" segundos."
+            );
+            segundos = 0
+        }
     }
 
 }
