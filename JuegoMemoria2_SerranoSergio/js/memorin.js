@@ -13,7 +13,7 @@ class Tablero{
     this.filas = filas;
     this.columnas = columnas;
     this.casillas = filas*columnas;
-
+    
     this.crearTablero();
     }
 
@@ -70,7 +70,7 @@ class Tablero{
 
         puntuacion.id = 1;
         puntuacion.innerHTML = puntos+"/"+(this.casillas / 2) * 10
-        
+
         for (let i = 0; i < this.filas; i++) {
         fila = document.createElement('tr');
         tabla.appendChild(fila);
@@ -84,15 +84,27 @@ class Tablero{
             
             }            
         }
-
+        document.body.setAttribute("onload", "carga()")
         document.body.appendChild(titulo)
         document.body.appendChild(puntuacion)
+
         document.body.appendChild(tabla)
         document.body.appendChild(reiniciar)
         
 
     }
     
+    carga()
+    {
+        
+        
+        setInterval(
+            
+        )
+        
+
+    }
+
 }
 
 
@@ -204,6 +216,7 @@ class Memorin extends Tablero{
         {
             alert("Enhorabuena, Has ganado!"+
                    "\nTu puntuacion ha sido de "+puntos+"/"+ (this.casillas / 2) * 10
+                    +"\nLo has logrado en "+this.tiempo
             );
         }
     }
@@ -233,13 +246,14 @@ class Memorin extends Tablero{
 
         celda.innerHTML = valorCelda
         celda.style.background = "linear-gradient(90deg, #0066CC 0%, #28b3d6 100%)";
-        celda.dataset.despejado = true;
+
 
         if(contador == 0)
         {
             carta1 = celda.innerText;
             carta1id = celda.getAttribute("id")
             contador = contador + 1;
+            
             
         }
         else if(contador == 1)
@@ -264,39 +278,55 @@ class Memorin extends Tablero{
             {
                 if(contadorPuntos == 0)
                 {
-                    
+                    celda1 = document.getElementById(carta1id);
+                    celda2 = document.getElementById(carta2id);
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 10;
                     document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
-                    
+                    celda1.dataset.despejado = true
+                    celda2.dataset.despejado = true
+                    celda1.removeEventListener("contextmenu", this.despejar)
+                    celda2.removeEventListener("contextmenu", this.despejar)
                 }
                 else if(contadorPuntos == 1)
                 {
-                    
+                    celda1 = document.getElementById(carta1id);
+                    celda2 = document.getElementById(carta2id);
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 5;
                     document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
-                    
+                    celda1.dataset.despejado = true
+                    celda2.dataset.despejado = true
+                    celda1.removeEventListener("contextmenu", this.despejar)
+                    celda2.removeEventListener("contextmenu", this.despejar)
                 }
                 else if(contadorPuntos == 2)
                 {
-                    
+                    celda1 = document.getElementById(carta1id);
+                    celda2 = document.getElementById(carta2id);
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 2.5;
                     document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
-                    
+                    celda1.dataset.despejado = true
+                    celda2.dataset.despejado = true
+                    celda1.removeEventListener("contextmenu", this.despejar)
+                    celda2.removeEventListener("contextmenu", this.despejar)
                 }
                 else if(contadorPuntos >= 3)
                 {
-                    
+                    celda1 = document.getElementById(carta1id);
+                    celda2 = document.getElementById(carta2id);
                     contador = 0;
                     contadorPuntos = 0;
                     puntos += 0;
                     document.getElementById(1).innerHTML = puntos+"/"+(this.casillas / 2) * 10;
-                    
+                    celda1.dataset.despejado = true
+                    celda2.dataset.despejado = true
+                    celda1.removeEventListener("contextmenu", this.despejar)
+                    celda2.removeEventListener("contextmenu", this.despejar)
                 }
             }
             console.log(puntos);
